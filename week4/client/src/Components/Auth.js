@@ -1,19 +1,28 @@
 import React, { useState, useContext } from 'react'
 import AuthForm from './AuthForm'
-import { UserContext } from '../Context/UserContext';
+import { UserContext } from '../Context/UserProvider';
 //import IssueList from './IssueList';
 
-const initInputs = { username: "", password: "" }
+const initLoginInputs = { username: '', password: '' }
+const initNewAcctInputs = { firstname: '', lastname: '', username: '', password: ''}
 
-export default function Auth(){
-  const [inputs, setInputs] = useState(initInputs)
+export default function Auth() {
+  const [loginInputs, setLoginInputs] = useState(initLoginInputs)
+  const [newAcctInputs, setNewAcctInputs] = useState(initNewAcctInputs)
   const [toggle, setToggle] = useState(false)
-
   const { signup, login } = useContext(UserContext)
 
-  function handleChange(e){
+  function handleChangeLogin(e){
     const {name, value} = e.target
-    setInputs(prevInputs => ({
+    setLoginInputs(prevInputs => ({
+      ...prevInputs,
+      [name]: value
+    }))
+  }
+
+  function handleChangeNewAcct(e){
+    const {name, value} = e.target
+    setNewAcctInputs(prevInputs => ({
       ...prevInputs,
       [name]: value
     }))
@@ -21,36 +30,35 @@ export default function Auth(){
 
   function handleSignup(e){
     e.preventDefault()
-    signup(inputs)
+    signup(newAcctInputs)
   }
 
   function handleLogin(e){
     e.preventDefault()
-    login(inputs)
+    login(loginInputs)
   }
 
   return (
     <div className="auth-container">
-      <h1>IssueList</h1>
       { !toggle ?
         <>
-          <AuthForm 
-            handleChange={handleChange}
-            handleSubmit={handleSignup}
-            inputs={inputs}
-            btnText="Sign up"
-          />
-          <p onClick={() => setToggle(prev => !prev)}>Already a member?-Log in</p>
+        <AuthForm
+          handleChange={handleChangeLogin}
+          handleSubmit={handleLogin}
+          inputs={loginInputs}
+          btnText="Login"
+        />
+        <p className='link' onClick={() => setToggle(prev => !prev)}>Not a member?</p>
         </>
       :
         <>
-          <AuthForm 
-            handleChange={handleChange}
-            handleSubmit={handleLogin}
-            inputs={inputs}
-            btnText="Login"
-          />
-          <p onClick={() => setToggle(prev => !prev)}>New to the site?-Register</p>
+        <AuthForm 
+          handleChange={handleChangeNewAcct}
+          handleSubmit={handleSignup}
+          inputs={newAcctInputs}
+          btnText="Sign up"
+        />
+        <p className='link' onClick={() => setToggle(prev => !prev)}>Already a member?</p>
         </>
       }
     </div>

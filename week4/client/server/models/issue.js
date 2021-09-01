@@ -21,5 +21,10 @@ const issueSchema = new Schema({
     type: String,
     required: true,
   },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+  }
 });
 module.exports = mongoose.model("issue", issueSchema);

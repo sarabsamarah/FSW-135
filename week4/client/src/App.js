@@ -4,7 +4,7 @@ import Navbar from './Components/NavBar'
 import Auth from './Components/Auth'
 import Profile from './Components/Profile'
 import Public from './Components/Public'
-import { UserContext } from './Context/UserContext'
+import { UserContext } from './Context/UserProvider'
 
 export default function App(){
   const { token, logout } = useContext(UserContext)

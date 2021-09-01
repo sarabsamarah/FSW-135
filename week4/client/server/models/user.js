@@ -3,19 +3,19 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: {
     type: String,
-    required: true,
+    required: true
   },
   password: {
     type: String,
-    required: true,
+    required: true
   },
   isAdmin: {
     type: Boolean,
-    required: true,
+    required: true
   },
   memberSince: {
     type: String,
-    required: true,
+    required: true
   },
 });
 module.exports = mongoose.model("user", userSchema);

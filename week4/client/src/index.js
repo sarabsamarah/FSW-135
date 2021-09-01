@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import UserProvider from "./Context/UserContext";
+import UserProvider from "./Context/UserProvider";
 import App from "./App";
 
 ReactDOM.render(

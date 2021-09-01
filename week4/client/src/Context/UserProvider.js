@@ -8,7 +8,12 @@ userAxios.interceptors.request.use((config) => {
   return config;
 });
 export default function UserProvider(props) {
-  const initialState = { user: {}, token: "" };
+  const initialState = { 
+      user: JSON.parse(localStorage.getItem('user')) || {}, 
+      token: localStorage.getItem('token') || '', 
+      issues: JSON.parse(localStorage.getItem('issues')) || [],
+      allIssues: JSON.parse(localStorage.getItem('allIssues')) || []
+  }
   const [userState, setUserState] = useState(initialState);
 
   function signUp(credentials) {
@@ -34,7 +39,7 @@ export default function UserProvider(props) {
         const { user, token } = res.data;
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
-        getUserTodos();
+        getUserIssues();
         setUserState((prevUserState) => ({
           ...prevUserState,
           user,
@@ -50,17 +55,17 @@ export default function UserProvider(props) {
     setUserState({
       user: {},
       token: "",
-      todos: [],
+    rIssues: [],
     });
   }
 
-  function getUserTodos() {
+  function getUserIssues() {
     userAxios
-      .get("/api/todo/user")
+      .get("/api/issue/user")
       .then((res) => {
         setUserState((prevState) => ({
           ...prevState,
-          todos: res.data,
+        rIssues: res.data,
         }));
       })
       .catch((err) => console.log(err.response.data.errMsg));
@@ -72,7 +77,7 @@ export default function UserProvider(props) {
       .then((res) => {
         setUserState((prevState) => ({
           ...prevState,
-          todos: [...prevState.todos, res.data],
+        rIssues: [ res.data],
         }));
       })
       .catch((err) => console.log(err.response.data.errMsg));
