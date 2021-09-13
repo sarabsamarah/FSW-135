@@ -17,7 +17,7 @@
   }
   
   .app {
-    border: 1px solid black;
+    border: 5px solid red;
     width: 700px;
     margin: auto;
   }
@@ -27,6 +27,7 @@
     justify-content: space-around;
     align-items: center;
     height: 50px;
+    background-color:royalblue;
   }
   
   .auth-container {
@@ -77,10 +78,8 @@
     flex-direction: column;
     align-items: center;
     height:75vh;
-    background-image: url("votes.jpeg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    opacity: 0.5;
+    background-color: red;
+    color: white;
   }
 
 
@@ -108,6 +107,8 @@
     margin: 8px;
     font-size: 1em;
     text-align: center;
+    flex-direction: column;
+    align-items:center;
   }
   
   .issues > form {
