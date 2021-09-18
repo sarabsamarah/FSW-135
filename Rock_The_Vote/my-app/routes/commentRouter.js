@@ -15,10 +15,13 @@ commentRouter.route('/')
     })
 
 // post a new comment based on issue id
-commentRouter.route('/:issueId')
+commentRouter.route('/add/:issueId')
     .post((req, res, next) => {
         req.body.issue = req.params.issueId
+        req.body.user = req.user._id
+
         const newComment = new Comment(req.body)
+
         newComment.save((err, savedComment) => {
             if (err) {
                 res.status(500)
