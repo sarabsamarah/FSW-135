@@ -150,6 +150,7 @@ export default function UserProvider(props) {
     function getComments() {
         userAxios.get('/api/comments')
             .then(res => {
+                console.log("what is going on", res.data)
                 localStorage.setItem('comments', JSON.stringify(res.data))
 
                 setUserState(prevState => ({
@@ -217,15 +218,7 @@ export default function UserProvider(props) {
             })
             .catch(err => console.log(err.response.data.errMsg))
     }
-    const getUsername = (id) => {
-        userAxios.get(`/api/user/${id}`).then((res) => {
-          const newUserName = res.data;
-          setUserState((prevState) => ({
-            ...prevState,
-            username: newUserName,
-          }));
-        });
-      }
+
 
     return (
         <UserContext.Provider
@@ -239,7 +232,6 @@ export default function UserProvider(props) {
                 resetAuthErr,
                 handleUpvote,
                 handleDownvote,
-                getUsername,
                 resetAlreadyVoted
             }}>
             { props.children }

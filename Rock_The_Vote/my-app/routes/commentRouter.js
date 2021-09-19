@@ -20,6 +20,8 @@ commentRouter.route('/add/:issueId')
         req.body.issue = req.params.issueId
         req.body.user = req.user._id
 
+        console.log("Will this add user", req.body.user)
+
         const newComment = new Comment(req.body)
 
         newComment.save((err, savedComment) => {
